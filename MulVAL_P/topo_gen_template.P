@@ -1,0 +1,31 @@
+attackerLocated(internet).
+attackGoal(execCode({{end}},_)).
+
+hacl(internet, {{server_list0}}, '{{Web_Transport}}', {{Web_Port}}).
+hacl({{source_list0}}, {{des_list0}}, _, _).
+hacl({{source_list1}}, {{des_list1}}, _, _).
+hacl({{source_list2}}, {{des_list2}}, _, _).
+hacl({{source_list3}}, {{des_list3}}, _, _).
+
+
+/*hacl(H,H,_,_).*/
+
+/* configuration information of webServer */
+vulExists({{server_list0}}, '{{CVE_Id_Web}}', '{{Web_Module}}').
+vulProperty('{{CVE_Id_Web}}', remoteExploit, privEscalation).
+networkServiceInfo({{server_list0}}, '{{Web_Module}}', '{{Web_Transport}}', {{Web_Port}}, '{{Web_Product}}').
+
+
+/* configuration information of workStation */
+nfsMounted({{end}}, '/usr/local/share', {{server_list1}}, '/export', read).
+
+
+/* configuration information of fileServer */
+networkServiceInfo({{server_list1}}, '{{File_Module}}', '{{File_Transport}}', {{File_Port}}, root).
+nfsExportInfo({{server_list1}}, '/export', _anyAccess, {{des_list2}}).
+nfsExportInfo({{server_list1}}, '/export', _anyAccess, {{des_list0}}).
+nfsExportInfo({{server_list1}}, '/export', _anyAccess, {{des_list1}}).
+nfsExportInfo({{server_list1}}, '/export', _anyAccess, {{des_list3}}).
+vulExists({{server_list1}}, '{{CVE_Id_File}}', {{File_Module}}).
+vulProperty('{{CVE_Id_File}}', remoteExploit, privEscalation).
+localFileProtection({{server_list1}}, root, _, _).

@@ -1,0 +1,24 @@
+attackerLocated(internet).
+attackGoal(execCode(workStation,_)).
+
+hacl(internet, webServer, tcp, 443).
+hacl(webServer, _,  _, _).
+hacl(fileServer, _, _, _).
+hacl(workStation, _, _, _).
+hacl(H,H,_,_).
+
+/* configuration information of fileServer */
+networkServiceInfo(fileServer, http, tcp, 80, root).
+nfsExportInfo(fileServer, '/export', _anyAccess, workStation).
+nfsExportInfo(fileServer, '/export', _anyAccess, webServer).
+vulExists(fileServer, 'CVE-2006-3011', http).
+vulProperty('CVE-2006-3011', remoteExploit, privEscalation).
+localFileProtection(fileServer, root, _, _).
+
+/* configuration information of webServer */
+vulExists(webServer, 'CVE-2015-3185', https).
+vulProperty('CVE-2015-3185', remoteExploit, privEscalation).
+networkServiceInfo(webServer, https, tcp, 443, 'Apache httpd').
+
+/* configuration information of workStation */
+nfsMounted(workStation, '/usr/local/share', fileServer, '/export', read).
