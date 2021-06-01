@@ -1,0 +1,9 @@
+
+AutoPentest-DRL v0.1
+--------------------
+* First public release of AutoPentest-DRL, an automated penetration
+  testing framework based on Deep Reinforcement Learning (DRL)
+  techniques. The framework can determine the most appropriate attack
+  path for a given logical network, and can also be used to execute a
+  penetration testing attack on a real network via tools such as Nmap
+  and Metasploit.
